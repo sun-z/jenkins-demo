@@ -12,7 +12,7 @@ spec:
         app: jenkins-demo
     spec:
       containers:
-      - image: 192.168.3.123:30002/ukubernetes/jenkins-demo:<BUILD_TAG>
+      - image: harbor.sun.com/ukubernetes/jenkins-demo:<BUILD_TAG>
         imagePullPolicy: IfNotPresent
         name: jenkins-demo
         env:
