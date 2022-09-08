@@ -2,7 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jenkins-demo
+  namespace: NS
 spec:
+  replicas: RSCOUNT
   selector:
     matchLabels:
       app: jenkins-demo
@@ -12,9 +14,12 @@ spec:
         app: jenkins-demo
     spec:
       containers:
-      - image: harbor.sun.com/ukubernetes/jenkins-demo:<BUILD_TAG>
+      - image: IMAGE_NAME
         imagePullPolicy: IfNotPresent
         name: jenkins-demo
         env:
-        - name: branch
-          value: <BRANCH_NAME>
+        - name: NAMESPACE
+          value: NS
+      imagePullSecrets:
+      - name: SECRET_NAME
+
