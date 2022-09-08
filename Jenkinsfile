@@ -14,13 +14,13 @@ node('bypay-jnlp') {
     }
     stage('Build') {
         echo "3.Build Docker Image Stage"
-        sh "docker build -t 192.168.3.123:30002/ukubernetes/jenkins-demo:${build_tag} ."
+        sh "docker build -t harbor.sun.com/ukubernetes/jenkins-demo:${build_tag} ."
     }
     stage('Push') {
         echo "4.Push Docker Image Stage"
         withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DockerHubPassword', usernameVariable: 'DockerHubUser')]) {
-            sh "docker login http://192.168.3.123:30002 -u ${DockerHubUser} -p ${DockerHubPassword}"
-            sh "docker push 192.168.3.123:30002/ukubernetes/jenkins-demo:${build_tag}"
+            sh "docker login harbor.sun.com -u ${DockerHubUser} -p ${DockerHubPassword}"
+            sh "docker push harbor.sun.com/ukubernetes/jenkins-demo:${build_tag}"
         }
     }
     stage('Deploy') {
